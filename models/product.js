@@ -1,22 +1,56 @@
 const mongoose = require("mongoose");
 
-const productSchema = new mongoose.Schema({
-    name: {
+const CertificateSchema = new mongoose.Schema({
+    certificate_id: {
+        type: String, 
+        required: true
+    },
+    participant_name: {
         type: String,
         required: true
     },
-    product_type: {
+    course_name: {
         type: String,
         required: true
     },
-    price: {
-        type: Number,
+    course_id: {
+        type: String, 
         required: true
     },
-    unit: {
-        type: Number,
+    date_of_completion: {
+        type: Date,
         required: true
     },
+    instructor_name: {
+        type: String,
+        required: true
+    },
+    issue_date: {
+        type: Date,
+        required: true
+    },
+    template_id: {
+        type: String, 
+        required: true
+    },
+    organization_name: {
+        type: String,
+        required: true
+    },
+    status: {
+        type: String,
+        required: true,
+        enum: ["issued", "pending", "revoked"] // ค่าที่เป็นไปได้
+    },
+    participant_email: {
+        type: String,
+        required: true,
+        match: [/.+\@.+\..+/, "Please enter a valid email address"] // ตรวจสอบรูปแบบอีเมล
+    },
+    remarks: {
+        type: String,
+        required: true
+    }
 });
 
-module.exports = mongoose.model("Product", productSchema);
+module.exports = mongoose.model('Certificate', CertificateSchema);
